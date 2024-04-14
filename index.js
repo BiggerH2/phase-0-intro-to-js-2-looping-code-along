@@ -1,43 +1,47 @@
-// Code your solutions in this file
-require('./helpers.js');
+// The for loop example
+for (let age = 30; age < 40; age++) {
+  console.log(`I'm ${age} years old. Happy birthday to me!`);
+}
 
-const sinon = require('sinon');
+// Using a for loop with arrays
+const gifts = ["teddy bear", "drone", "doll"];
 
-describe('index.js', () => {
-  let spy;
+function wrapGifts(gifts) {
+  for (let i = 0; i < gifts.length; i++) {
+    console.log(`Wrapped ${gifts[i]} and added a bow!`);
+  }
 
-  beforeEach(() => {
-    spy = sinon.spy(console, 'log');
-  });
+  return gifts;
+}
 
-  afterEach(() => {
-    spy.restore();
-  });
+wrapGifts(gifts);
 
-  describe('writeCards()', () => {
-    it('returns an array of thank you messages for each name provided to the function', () => {
-      const messages = writeCards(["Guadalupe", "Ollie", "Aki"], "surprise");
-      expect(messages).to.deep.eq([
-        "Thank you, Guadalupe, for the wonderful surprise gift!",
-        "Thank you, Ollie, for the wonderful surprise gift!",
-        "Thank you, Aki, for the wonderful surprise gift!",
-      ]);
-    });
-  });
+// Function to create thank you cards
+function writeCards(names, eventName) {
+  const thankYouCards = [];
 
-  describe('countDown()', () => {
-    it('invokes console.log once for each number, counting down from the number provided to zero', () => {
-      countDown(10);
-      expect(spy.callCount, "Expected countDown(10) to invoke 11 console.logs").to.eq(11);
-    });
+  for (let i = 0; i < names.length; i++) {
+    thankYouCards.push(`Thank you, ${names[i]}, for the wonderful ${eventName} gift!`);
+  }
 
-    it('logs each number when counting down, starting from the number provided', () => {
-      countDown(4);
-      expect(spy.calledWithExactly(4), "Expected countDown(4) to log 4 first").to.be.true;
-      expect(spy.calledWithExactly(3), "Expected countDown(4) to log 3 after 4").to.be.true;
-      expect(spy.calledWithExactly(2), "Expected countDown(4) to log 2 after 3").to.be.true;
-      expect(spy.calledWithExactly(1), "Expected countDown(4) to log 1 after 2").to.be.true;
-      expect(spy.calledWithExactly(0), "Expected countDown(4) to log 0 after 1").to.be.true;
-    });
-  });
-});
+  return thankYouCards;
+}
+
+// Testing the writeCards function
+const names = ["Charlie", "Samip", "Ali"];
+const eventName = "birthday";
+const thankYouMessages = writeCards(names, eventName);
+console.log(thankYouMessages);
+
+// Function to count down from a given positive integer
+function countDown(startingNumber) {
+  let count = startingNumber;
+
+  while (count >= 0) {
+    console.log(count);
+    count--;
+  }
+}
+
+// Testing the countDown function
+countDown(10);
